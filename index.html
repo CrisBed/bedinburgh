@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bedinburgh - La Capitale delle Cavolate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        /* === RESET & BASE === */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --giallo: #FFD700;
+            --arancio: #FF6B35;
+            --azzurro: #00D4FF;
+            --viola: #9B59B6;
+            --rosa: #FF69B4;
+            --verde: #2ECC71;
+            --scuro: #1a1a2e;
+            --bianco: #FFFDF7;
+            --fumetto-bordo: 4px solid #222;
+            --ombra-fumetto: 6px 6px 0px #222;
+            --ombra-fumetto-sm: 3px 3px 0px #222;
+        }
+
+        body {
+            font-family: 'Comic Neue', cursive, sans-serif;
+            background-color: var(--bianco);
+            color: #222;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* === SFONDO PATTERN === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                radial-gradient(circle, #ddd 1px, transparent 1px);
+            background-size: 25px 25px;
+            opacity: 0.3;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* === HEADER === */
+        .header {
+            background: linear-gradient(135deg, var(--arancio), var(--rosa), var(--viola));
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom: 6px solid #222;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px; left: 0; right: 0;
+            height: 20px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--giallo) 0px, var(--giallo) 30px,
+                var(--azzurro) 30px, var(--azzurro) 60px,
+                var(--rosa) 60px, var(--rosa) 90px,
+                var(--verde) 90px, var(--verde) 120px
+            );
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            color: var(--giallo);
+            text-shadow: 4px 4px 0 #222, -2px -2px 0 #222, 2px -2px 0 #222, -2px 2px 0 #222;
+            letter-spacing: 4px;
+            transform: rotate(-2deg);
+            display: inline-block;
+            animation: wobble 3s ease-in-out infinite;
+        }
+
+        .sottotitolo {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--bianco);
+            margin-top: 0.5rem;
+            text-shadow: 2px 2px 0 #222;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-2deg); }
+            50% { transform: rotate(2deg); }
+        }
+
+        /* === NAV === */
+        .nav {
+            background: var(--scuro);
+            padding: 0.8rem;
+            text-align: center;
+            border-bottom: 4px solid var(--giallo);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav a {
+            color: var(--giallo);
+            text-decoration: none;
+            font-family: 'Bangers', cursive;
+            font-size: 1.2rem;
+            margin: 0 1rem;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+
+        .nav a:hover {
+            color: var(--azzurro);
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        /* === SEZIONI === */
+        .sezione {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .titolo-sezione {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--arancio);
+            text-shadow: 3px 3px 0 #222;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .titolo-sezione::after {
+            content: '';
+            display: block;
+            height: 6px;
+            background: var(--giallo);
+            border-radius: 3px;
+            margin-top: 4px;
+        }
+
+        /* === HERO CHI SIAMO === */
+        .chi-siamo {
+            background: linear-gradient(135deg, #FFF3CD, #FFE0B2);
+            border: var(--fumetto-bordo);
+            border-radius: 20px;
+            box-shadow: var(--ombra-fumetto);
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .chi-siamo p {
+            font-size: 1.15rem;
+            margin-bottom: 1rem;
+        }
+
+        .personaggi {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .personaggio {
+            background: white;
+            border: var(--fumetto-bordo);
+            border-radius: 15px;
+            box-shadow: var(--ombra-fumetto-sm);
+            padding: 1.5rem;
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .personaggio:hover {
+            transform: rotate(2deg) scale(1.03);
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--arancio);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--giallo), var(--arancio));
+        }
+
+        .personaggio h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.8rem;
+            color: var(--viola);
+            text-shadow: 2px 2px 0 #ddd;
+        }
+
+        .personaggio .ruolo {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--arancio);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* === FUMETTO / SPEECH BUBBLE === */
+        .fumetto {
+            background: white;
+            border: 3px solid #222;
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            margin-bottom: 2rem;
+            box-shadow: var(--ombra-fumetto-sm);
+        }
+
+        .fumetto::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 40px;
+            border-width: 20px 15px 0;
+            border-style: solid;
+            border-color: #222 transparent transparent transparent;
+        }
+
+        .fumetto::before {
+            content: '';
+            position: absolute;
+            bottom: -16px;
+            left: 42px;
+            border-width: 18px 13px 0;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+            z-index: 1;
+        }
+
+        .fumetto.destra::after {
+            left: auto;
+            right: 40px;
+        }
+
+        .fumetto.destra::before {
+            left: auto;
+            right: 42px;
+        }
+
+        .fumetto .autore {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--viola);
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        /* === REGOLE DI CASA === */
+        .regole-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .regola {
+            background: white;
+            border: var(--fumetto-bordo);
+            border-radius: 15px;
+            box-shadow: var(--ombra-fumetto-sm);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .regola:hover {
+            transform: translateY(-5px) rotate(1deg);
+        }
+
+        .regola .numero {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--arancio);
+            text-shadow: 2px 2px 0 #ddd;
+        }
+
+        .regola .testo {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* === GENERATORE CAVOLATE === */
+        .generatore-box {
+            background: linear-gradient(135deg, var(--azzurro), var(--viola));
+            border: var(--fumetto-bordo);
+            border-radius: 20px;
+            box-shadow: var(--ombra-fumetto);
+            padding: 2.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .generatore-box h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            text-shadow: 2px 2px 0 #222;
+            margin-bottom: 1rem;
+        }
+
+        .risultato-cavolata {
+            background: white;
+            color: #222;
+            border: 3px solid var(--giallo);
+            border-radius: 15px;
+            padding: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            font-family: 'Permanent Marker', cursive;
+        }
+
+        .btn-cavolata {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            padding: 0.8rem 2.5rem;
+            background: var(--giallo);
+            color: #222;
+            border: 3px solid #222;
+            border-radius: 50px;
+            box-shadow: var(--ombra-fumetto-sm);
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.2s;
+        }
+
+        .btn-cavolata:hover {
+            transform: scale(1.08) rotate(-2deg);
+            background: var(--arancio);
+            color: white;
+        }
+
+        .btn-cavolata:active {
+            transform: scale(0.95);
+            box-shadow: 1px 1px 0 #222;
+        }
+
+        /* === WALL OF FAME === */
+        .wall-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .wall-card {
+            background: white;
+            border: var(--fumetto-bordo);
+            border-radius: 15px;
+            box-shadow: var(--ombra-fumetto-sm);
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .wall-card:hover {
+            transform: rotate(-1deg) scale(1.02);
+        }
+
+        .wall-card-header {
+            padding: 1rem 1.5rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 0 #222;
+        }
+
+        .wall-card-body {
+            padding: 1.5rem;
+        }
+
+        .wall-card:nth-child(1) .wall-card-header { background: var(--arancio); }
+        .wall-card:nth-child(2) .wall-card-header { background: var(--viola); }
+        .wall-card:nth-child(3) .wall-card-header { background: var(--azzurro); }
+        .wall-card:nth-child(4) .wall-card-header { background: var(--rosa); }
+        .wall-card:nth-child(5) .wall-card-header { background: var(--verde); }
+        .wall-card:nth-child(6) .wall-card-header { background: var(--arancio); }
+
+        .tag {
+            display: inline-block;
+            background: var(--giallo);
+            color: #222;
+            border: 2px solid #222;
+            border-radius: 50px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin: 0.2rem;
+        }
+
+        /* === QUIZ BEDIN === */
+        .quiz-container {
+            background: linear-gradient(135deg, var(--rosa), var(--arancio));
+            border: var(--fumetto-bordo);
+            border-radius: 20px;
+            box-shadow: var(--ombra-fumetto);
+            padding: 2.5rem;
+            color: white;
+        }
+
+        .quiz-container h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            text-shadow: 2px 2px 0 #222;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-domanda {
+            background: white;
+            color: #222;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .quiz-opzioni {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .quiz-btn {
+            font-family: 'Comic Neue', cursive;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 1rem;
+            background: white;
+            color: #222;
+            border: 3px solid #222;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--ombra-fumetto-sm);
+        }
+
+        .quiz-btn:hover {
+            transform: scale(1.05);
+            background: var(--giallo);
+        }
+
+        .quiz-btn.correct {
+            background: var(--verde);
+            color: white;
+        }
+
+        .quiz-btn.wrong {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .quiz-risultato {
+            text-align: center;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            min-height: 40px;
+        }
+
+        .quiz-nav {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        /* === CONTATORE CAVOLATE === */
+        .contatore {
+            text-align: center;
+            padding: 2rem;
+            background: var(--scuro);
+            border: var(--fumetto-bordo);
+            border-radius: 20px;
+            box-shadow: var(--ombra-fumetto);
+            color: white;
+        }
+
+        .contatore h3 {
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            color: var(--giallo);
+            text-shadow: 2px 2px 0 #111;
+        }
+
+        .numero-grande {
+            font-family: 'Bangers', cursive;
+            font-size: 5rem;
+            color: var(--arancio);
+            text-shadow: 3px 3px 0 #111;
+            line-height: 1;
+            margin: 0.5rem 0;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            background: var(--scuro);
+            color: #aaa;
+            text-align: center;
+            padding: 2rem;
+            border-top: 4px solid var(--giallo);
+            margin-top: 3rem;
+        }
+
+        .footer .logo-footer {
+            font-family: 'Bangers', cursive;
+            font-size: 2rem;
+            color: var(--giallo);
+            text-shadow: 2px 2px 0 #111;
+        }
+
+        .footer p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* === EFFETTI SPECIALI === */
+        .pow {
+            display: inline-block;
+            background: var(--giallo);
+            border: 3px solid #222;
+            padding: 0.3rem 1rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            transform: rotate(-5deg);
+            box-shadow: var(--ombra-fumetto-sm);
+        }
+
+        .zap {
+            display: inline-block;
+            background: var(--azzurro);
+            color: white;
+            border: 3px solid #222;
+            padding: 0.3rem 1rem;
+            font-family: 'Bangers', cursive;
+            font-size: 1.5rem;
+            transform: rotate(3deg);
+            box-shadow: var(--ombra-fumetto-sm);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            .nav a { margin: 0 0.4rem; font-size: 1rem; }
+            .personaggi { flex-direction: column; align-items: center; }
+            .quiz-opzioni { grid-template-columns: 1fr; }
+            .chi-siamo { padding: 1.5rem; }
+        }
+
+        /* === ANIMAZIONI SCROLL === */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === EASTER EGG === */
+        .easter-egg-trigger {
+            cursor: default;
+            user-select: none;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -10px;
+            z-index: 9999;
+            pointer-events: none;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo easter-egg-trigger" onclick="lanciaConfetti()">BEDINBURGH</div>
+    <div class="sottotitolo">La Capitale Mondiale delle Cavolate dal 2026</div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="#chi-siamo">Chi Siamo</a>
+    <a href="#regole">Le Regole</a>
+    <a href="#wall">Wall of Fame</a>
+    <a href="#generatore">Generatore</a>
+    <a href="#quiz">Quiz</a>
+</nav>
+
+<!-- CHI SIAMO -->
+<section class="sezione fade-in" id="chi-siamo">
+    <div class="titolo-sezione">I Fondatori di Bedinburgh</div>
+    <div class="chi-siamo">
+        <p>Benvenuti a <strong>Bedinburgh</strong>, la citta-stato piu assurda del web. Fondata nel 2026 da un padre e un figlio che non avevano niente di meglio da fare (spoiler: avevano, ma hanno scelto questo).</p>
+        <p>Qui non si fanno cose serie. Qui si fanno <span class="pow">CAVOLATE!</span> con stile.</p>
+
+        <div class="personaggi">
+            <div class="personaggio">
+                <div class="avatar">&#128526;</div>
+                <h3>Cristian</h3>
+                <div class="ruolo">Sindaco Supremo</div>
+                <p>Ex ristoratore, markettaro, tipo che parla con le pietre e legge i tarocchi. Ha venduto un pub e comprato un dominio. Priorita chiare.</p>
+            </div>
+            <div class="personaggio">
+                <div class="avatar">&#128170;</div>
+                <h3>Gabriel</h3>
+                <div class="ruolo">Vice-Sindaco & Capo del Caos</div>
+                <p>Rugbista, creativo, fonte inesauribile di idee improbabili. Se qualcosa puo andare storto in modo divertente, lui trova il modo.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIALOGHI FUMETTO -->
+<section class="sezione fade-in">
+    <div class="titolo-sezione">Conversazioni Tipiche</div>
+
+    <div class="fumetto">
+        <div class="autore">Cristian:</div>
+        <p>"Gabriel, hai fatto i compiti?"</p>
+    </div>
+
+    <div class="fumetto destra">
+        <div class="autore">Gabriel:</div>
+        <p>"Pa', ho fatto qualcosa di MOLTO piu importante. Ho scoperto che se metti il ketchup sulla pizza sembra un crimine. E lo e."</p>
+    </div>
+
+    <div class="fumetto">
+        <div class="autore">Cristian:</div>
+        <p>"...vai a fare i compiti."</p>
+    </div>
+
+    <div class="fumetto destra">
+        <div class="autore">Gabriel:</div>
+        <p>"Ma questo era SCIENZA, pa'!"</p>
+    </div>
+</section>
+
+<!-- REGOLE DI BEDINBURGH -->
+<section class="sezione fade-in" id="regole">
+    <div class="titolo-sezione">Le Regole di Bedinburgh</div>
+    <div class="regole-grid">
+        <div class="regola">
+            <div class="numero">#1</div>
+            <div class="testo">Se non fa ridere almeno uno dei due, non e una cavolata abbastanza buona.</div>
+        </div>
+        <div class="regola">
+            <div class="numero">#2</div>
+            <div class="testo">La pizza con l'ananas e vietata per legge. Non si discute.</div>
+        </div>
+        <div class="regola">
+            <div class="numero">#3</div>
+            <div class="testo">Ogni idea assurda merita almeno 5 minuti di discussione seria.</div>
+        </div>
+        <div class="regola">
+            <div class="numero">#4</div>
+            <div class="testo">Il rugby e religione. Il resto e opinione.</div>
+        </div>
+        <div class="regola">
+            <div class="numero">#5</div>
+            <div class="testo">Se qualcuno dice "non si puo fare", Bedinburgh risponde: "guarda."</div>
+        </div>
+        <div class="regola">
+            <div class="numero">#6</div>
+            <div class="testo">Le cavolate migliori vengono dopo cena. E' scienza (vedi Regola Gabriel).</div>
+        </div>
+    </div>
+</section>
+
+<!-- WALL OF FAME -->
+<section class="sezione fade-in" id="wall">
+    <div class="titolo-sezione">Wall of Fame delle Cavolate</div>
+    <div class="wall-grid">
+        <div class="wall-card">
+            <div class="wall-card-header">La Grande Idea del Gelato</div>
+            <div class="wall-card-body">
+                <p>Cristian: "E se facessimo un gelato che si chiama Angel Ice?"<br>Gabriel: "Pa', facciamo prima il sito delle cavolate."<br>Cristian: "...hai ragione."</p>
+                <span class="tag">business</span> <span class="tag">gelato</span> <span class="tag">priorita</span>
+            </div>
+        </div>
+        <div class="wall-card">
+            <div class="wall-card-header">L'Incidente del Ketchup</div>
+            <div class="wall-card-body">
+                <p>Gabriel ha messo il ketchup sugli spaghetti. Cristian, ex ristoratore con 20 anni di esperienza, ha avuto un mancamento. Gabriel ha documentato tutto per "il sito".</p>
+                <span class="tag">emergenza</span> <span class="tag">cucina</span> <span class="tag">trauma</span>
+            </div>
+        </div>
+        <div class="wall-card">
+            <div class="wall-card-header">Rugby Filosofico</div>
+            <div class="wall-card-body">
+                <p>Gabriel: "Pa', nel rugby se cadi ti rialzi. Nella vita?"<br>Cristian: "Nella vita se cadi, tua nonna ti porta un piatto di pasta."</p>
+                <span class="tag">saggezza</span> <span class="tag">nonna</span> <span class="tag">rugby</span>
+            </div>
+        </div>
+        <div class="wall-card">
+            <div class="wall-card-header">Il Dominio</div>
+            <div class="wall-card-body">
+                <p>Cristian ha registrato bedinburgh.net nel 2024. Non ci ha messo niente dentro per due anni. La procrastinazione creativa e un'arte.</p>
+                <span class="tag">dominio</span> <span class="tag">vuoto</span> <span class="tag">arte</span>
+            </div>
+        </div>
+        <div class="wall-card">
+            <div class="wall-card-header">La Dieta</div>
+            <div class="wall-card-body">
+                <p>"Domani inizio la dieta" - Cristian, ogni domenica dal 2019.<br>"Anch'io!" - Gabriel, solidale, mangiando Nutella.</p>
+                <span class="tag">dieta</span> <span class="tag">nutella</span> <span class="tag">domani</span>
+            </div>
+        </div>
+        <div class="wall-card">
+            <div class="wall-card-header">Smart Working Bedin Style</div>
+            <div class="wall-card-body">
+                <p>Cristian che lavora al computer. Gabriel che gli chiede "cosa fai?" ogni 4 minuti. Produttivita: -300%. Risate: +infinity.</p>
+                <span class="tag">lavoro</span> <span class="tag">disturbo</span> <span class="tag">amore</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GENERATORE DI CAVOLATE -->
+<section class="sezione fade-in" id="generatore">
+    <div class="titolo-sezione">Generatore di Cavolate</div>
+    <div class="generatore-box">
+        <h3>Premi il Bottone. Ottieni Saggezza.</h3>
+        <div class="risultato-cavolata" id="risultato">
+            Premi il bottone, dai!
+        </div>
+        <button class="btn-cavolata" onclick="generaCavolata()">GENERA CAVOLATA!</button>
+    </div>
+</section>
+
+<!-- QUIZ -->
+<section class="sezione fade-in" id="quiz">
+    <div class="titolo-sezione">Quiz: Quanto Sei Bedin?</div>
+    <div class="quiz-container">
+        <h3>Scopri il tuo livello di Bedinitudine!</h3>
+        <div class="quiz-domanda" id="quiz-domanda">Caricamento...</div>
+        <div class="quiz-opzioni" id="quiz-opzioni"></div>
+        <div class="quiz-risultato" id="quiz-risultato"></div>
+        <div class="quiz-nav">
+            <button class="btn-cavolata" id="quiz-next-btn" onclick="prossimaQuiz()" style="display:none;">PROSSIMA!</button>
+            <button class="btn-cavolata" id="quiz-restart-btn" onclick="iniziaQuiz()" style="display:none;">RICOMINCIA!</button>
+        </div>
+    </div>
+</section>
+
+<!-- CONTATORE -->
+<section class="sezione fade-in">
+    <div class="contatore">
+        <h3>Cavolate dette oggi a Bedinburgh</h3>
+        <div class="numero-grande" id="contatore-num">0</div>
+        <p style="color: var(--giallo); font-family: 'Permanent Marker', cursive;">(il contatore sale da solo. Come le cavolate.)</p>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="logo-footer">BEDINBURGH.NET</div>
+    <p>La Capitale delle Cavolate &middot; Fondata 2026 da Cristian & Gabriel Bedin</p>
+    <p style="margin-top: 1rem; font-size: 0.8rem; color: #666;">Nessun ketchup e stato maltrattato nella creazione di questo sito. Forse.</p>
+</footer>
+
+<script>
+    // === GENERATORE DI CAVOLATE ===
+    const cavolate = [
+        "Se i gatti governassero il mondo, le tasse si pagherebbero in tonno.",
+        "Gabriel dice che il rugby e come la matematica: non lo capisce, ma ci mette impegno.",
+        "Cristian ha piu domini internet che piante vive in casa.",
+        "La pizza margherita e l'unica religione che unisce tutti. Tranne quelli dell'ananas.",
+        "Se lo smartwatch potesse parlare, direbbe: 'Per favore, fai almeno 100 passi oggi.'",
+        "Gabriel: 'Pa, da grande voglio fare il calciatore.' Cristian: 'Ma giochi a rugby.' Gabriel: '...dettagli.'",
+        "Bedinburgh ha piu regole non scritte che scritte. Questa e una di quelle scritte.",
+        "Il gelato andrebbe prescritto dal medico. Change my mind.",
+        "Se la procrastinazione fosse uno sport olimpico, Bedinburgh vincerebbe l'oro. Domani.",
+        "Secondo la scienza di Bedinburgh, il divano e il mobile piu sottovalutato della storia.",
+        "Gabriel pensa che 'budget' sia una parolaccia. Ha ragione.",
+        "Cristian legge i tarocchi. Il futuro dice: 'Piu gelato, meno stress.'",
+        "Il WiFi e il terzo genitore di ogni famiglia moderna.",
+        "A Bedinburgh il lunedi non esiste. E' solo domenica versione 2.0.",
+        "Se le lasagne della nonna fossero quotate in borsa, sarebbero l'unico investimento sicuro.",
+        "Gabriel ha provato a insegnare rugby al gatto. Il gatto ha vinto.",
+        "Il frigorifero di notte e un portale per un'altra dimensione. Una dimensione con la mortadella.",
+        "Cristian: 'Ho un piano!' Gabriel: 'Anche il Titanic aveva un piano, pa.'",
+        "A Bedinburgh l'ora legale si chiama 'ancora 5 minuti di sonno'.",
+        "Se chiedi a Gabriel cosa ha imparato a scuola, la risposta e sempre: 'Cose.'"
+    ];
+
+    function generaCavolata() {
+        const el = document.getElementById('risultato');
+        el.style.opacity = 0;
+        setTimeout(() => {
+            el.textContent = cavolate[Math.floor(Math.random() * cavolate.length)];
+            el.style.opacity = 1;
+        }, 200);
+
+        // Incrementa contatore
+        const cont = document.getElementById('contatore-num');
+        cont.textContent = parseInt(cont.textContent) + 1;
+    }
+
+    // === QUIZ ===
+    const quiz = [
+        {
+            domanda: "E' sabato sera. Cosa fai?",
+            opzioni: ["Netflix e divano", "Esco a correre", "Preparo un piatto gourmet", "Leggo i tarocchi al gatto"],
+            corretta: 0,
+            risposte: ["Bedin DOC!", "Sei pazzo? E' sabato!", "Molto Cristian, approvato.", "...va bene anche questo."]
+        },
+        {
+            domanda: "Qual e il condimento VIETATO a Bedinburgh?",
+            opzioni: ["Maionese", "Ketchup sulla pasta", "Peperoncino", "Pesto"],
+            corretta: 1,
+            risposte: ["Sbagliato, la maionese va bene sulle patatine.", "CORRETTO! Sei un vero cittadino!", "Il peperoncino e sempre benvenuto!", "Il pesto e sacro, non ci scherziamo."]
+        },
+        {
+            domanda: "Gabriel torna da scuola. Prima cosa che dice?",
+            opzioni: ["'Ho preso 10!'", "'Cosa si mangia?'", "'Ho fame'", "'Il prof e impazzito'"],
+            corretta: 2,
+            risposte: ["Bello, ma improbabile come prima frase.", "Quasi! Ma prima viene la fame pura.", "ESATTO! La fame prima di tutto!", "Questo viene dopo. Dopo aver mangiato."]
+        },
+        {
+            domanda: "Bedinburgh e famosa per:",
+            opzioni: ["Il castello", "Le cavolate", "Il kilt", "La birra"],
+            corretta: 1,
+            risposte: ["Quella e l'altra Edimburgo!", "BRAVISSIMO! Sei dei nostri!", "I kilt vanno bene, ma non e il focus.", "Cristian ha venduto il pub, basta birra... o no?"]
+        },
+        {
+            domanda: "Cristian ha registrato bedinburgh.net e poi:",
+            opzioni: ["Ci ha messo un blog", "Ha creato un e-commerce", "Non ci ha messo niente per 2 anni", "L'ha venduto"],
+            corretta: 2,
+            risposte: ["Troppo organizzato per essere vero.", "Magari! Ma no.", "ESATTO! La procrastinazione creativa!", "Mai! E' patrimonio della famiglia!"]
+        }
+    ];
+
+    let quizIndex = 0;
+    let quizScore = 0;
+
+    function iniziaQuiz() {
+        quizIndex = 0;
+        quizScore = 0;
+        document.getElementById('quiz-restart-btn').style.display = 'none';
+        document.getElementById('quiz-risultato').textContent = '';
+        mostraQuiz();
+    }
+
+    function mostraQuiz() {
+        if (quizIndex >= quiz.length) {
+            fineQuiz();
+            return;
+        }
+        const q = quiz[quizIndex];
+        document.getElementById('quiz-domanda').textContent = q.domanda;
+        document.getElementById('quiz-next-btn').style.display = 'none';
+        document.getElementById('quiz-risultato').textContent = '';
+
+        const container = document.getElementById('quiz-opzioni');
+        container.innerHTML = '';
+        q.opzioni.forEach((opt, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.textContent = opt;
+            btn.onclick = () => rispondiQuiz(i);
+            container.appendChild(btn);
+        });
+    }
+
+    function rispondiQuiz(idx) {
+        const q = quiz[quizIndex];
+        const btns = document.querySelectorAll('.quiz-btn');
+        btns.forEach((b, i) => {
+            b.disabled = true;
+            if (i === q.corretta) b.classList.add('correct');
+            if (i === idx && idx !== q.corretta) b.classList.add('wrong');
+        });
+
+        if (idx === q.corretta) quizScore++;
+        document.getElementById('quiz-risultato').textContent = q.risposte[idx];
+        document.getElementById('quiz-next-btn').style.display = 'inline-block';
+    }
+
+    function prossimaQuiz() {
+        quizIndex++;
+        mostraQuiz();
+    }
+
+    function fineQuiz() {
+        document.getElementById('quiz-domanda').textContent = 'Quiz finito!';
+        document.getElementById('quiz-opzioni').innerHTML = '';
+        document.getElementById('quiz-next-btn').style.display = 'none';
+        document.getElementById('quiz-restart-btn').style.display = 'inline-block';
+
+        let messaggio = '';
+        if (quizScore === 5) messaggio = "5/5 - Sei un BEDIN PURO! Cittadinanza onoraria concessa!";
+        else if (quizScore >= 3) messaggio = quizScore + "/5 - Buono! Sei quasi pronto per trasferirti a Bedinburgh!";
+        else messaggio = quizScore + "/5 - Devi studiare di piu. Torna dopo cena.";
+
+        document.getElementById('quiz-risultato').textContent = messaggio;
+    }
+
+    // === CONTATORE AUTO ===
+    let contatoreBase = 42; // Bedinburgh parte sempre da 42
+    document.getElementById('contatore-num').textContent = contatoreBase;
+    setInterval(() => {
+        contatoreBase += Math.floor(Math.random() * 3);
+        document.getElementById('contatore-num').textContent = contatoreBase;
+    }, 4000);
+
+    // === SCROLL ANIMATIONS ===
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // === EASTER EGG: CONFETTI ===
+    function lanciaConfetti() {
+        const colori = ['#FFD700', '#FF6B35', '#00D4FF', '#9B59B6', '#FF69B4', '#2ECC71'];
+        for (let i = 0; i < 40; i++) {
+            const conf = document.createElement('div');
+            conf.className = 'confetti';
+            conf.style.left = Math.random() * 100 + 'vw';
+            conf.style.width = (Math.random() * 12 + 6) + 'px';
+            conf.style.height = (Math.random() * 12 + 6) + 'px';
+            conf.style.background = colori[Math.floor(Math.random() * colori.length)];
+            conf.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            conf.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            conf.style.animationDelay = (Math.random() * 1) + 's';
+            document.body.appendChild(conf);
+            setTimeout(() => conf.remove(), 4000);
+        }
+    }
+
+    // === AVVIO ===
+    iniziaQuiz();
+</script>
+
+</body>
+</html>
